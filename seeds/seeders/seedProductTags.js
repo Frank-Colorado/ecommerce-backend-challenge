@@ -1,4 +1,4 @@
-const { ProductTag } = require("../../models");
+const { ProductTag, Product, Tag } = require("../../models");
 const { faker } = require("@faker-js/faker");
 
 const seedProductTags = async () => {
