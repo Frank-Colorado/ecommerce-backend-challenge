@@ -32,7 +32,7 @@ const seedProductTags = async () => {
     // The productTags array is an array of arrays so the flat method is used to flatten the array into a single array
     // The productTags array is passed to the bulkCreate method to create data in the ProductTag Model
     const productTagData = await ProductTag.bulkCreate(productTags.flat());
-    console.log({ productTagData });
+    return productTagData;
   } catch (err) {
     console.log({ err });
   }

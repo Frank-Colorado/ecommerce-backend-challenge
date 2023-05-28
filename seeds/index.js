@@ -10,6 +10,7 @@ const seedDb = async () => {
     // sync sequelize models to the database, then run the seed functions
     await sequelize.sync({ force: true });
     console.log("\n----- DATABASE SYNCED -----\n");
+
     // -----Seed Category Model-----
     await seedCategories();
     console.log("\n----- CATEGORIES SEEDED -----\n");
@@ -17,6 +18,7 @@ const seedDb = async () => {
     // -----Seed Product Model-----
     await seedProducts();
     console.log("\n----- PRODUCTS SEEDED -----\n");
+
     // -----Seed Tag Model-----
     await seedTags();
     console.log("\n----- TAGS SEEDED -----\n");

@@ -7,15 +7,16 @@ const seedProducts = async () => {
     // The result is an array
     // We need the length of the array to use in the faker.number.int method
     const allCategories = await Category.findAll();
-    // A product object is created with the faker library for the Product Model
-    const productObj = {
+    // The Array.from method is used to create an array of 50 elements
+    // The map method is used to create an object for each element in the array
+    // faker is used to create fake data for each object
+    // Each object is returned and added to the products array
+    const products = Array.from({ length: 50 }).map(() => ({
       product_name: faker.commerce.productName(),
       price: faker.commerce.price(),
-      stock: faker.number.int(),
+      stock: faker.number.int({ min: 1, max: 10 }),
       category_id: faker.number.int({ min: 1, max: allCategories.length }),
-    };
-    // The product object is passed to the faker.helpers.multiple method to create an array of 50 products
-    const products = faker.helpers.multiple(productObj, { count: 50 });
+    }));
     // The products array is passed to the bulkCreate method to create data in the Product Model
     const productData = await Product.bulkCreate(products);
     return productData;
