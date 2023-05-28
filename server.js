@@ -9,7 +9,6 @@ const routes = require("./routes");
 const sequelize = require("./config/connection");
 
 // MIDDELWARE
-app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
