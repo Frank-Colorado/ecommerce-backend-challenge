@@ -99,11 +99,28 @@ const updateProduct = async (req, res) => {
   }
 };
 
-// Function that deletes a product by id
+// This is an async function called deleteProduct
+// It is called when a user makes a DELETE request to /api/products/:id
 const deleteProduct = async (req, res) => {
   try {
-    // code here
+    // The id from req.params is stored in a variable called id
+    const { id } = req.params;
+    // The destroy method is a sequelize method that will delete one piece of data from the database
+    // where the id is equal to what is specified in the req.params
+    const productData = await Product.destroy({
+      where: {
+        id,
+      },
+    });
+    // If no data is found, a 404 status is sent to the client with a json message
+    if (!productData) {
+      res.status(404).json({ message: "No product found with this id" });
+      return;
+    }
+    // The deleted data is sent as a json to the client
+    res.json(productData);
   } catch (error) {
+    // If there is an error, the error is logged and a 500 status is sent to the client with a json message
     console.log({ error });
     res.status(500).json({ error: "Failed to delete product" });
   }
