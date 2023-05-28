@@ -7,8 +7,8 @@ const seedProducts = async () => {
     const productObj = {
       product_name: faker.commerce.productName(),
       price: faker.commerce.price(),
-      stock: faker.number(),
-      category_id: faker.number({ min: 1, max: categories.length }),
+      stock: faker.number.int(),
+      category_id: faker.number.int({ min: 1, max: categories.length }),
     };
     // The product object is passed to the faker.helpers.multiple method to create an array of 50 products
     const products = faker.helpers.multiple(productObj, { count: 50 });
