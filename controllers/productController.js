@@ -62,11 +62,38 @@ const createProduct = async (req, res) => {
   }
 };
 
-// Function that updates a product by id
+// This is an async function called updateProduct
+// It is called when a user makes a PUT request to /api/products/:id
 const updateProduct = async (req, res) => {
   try {
-    // code here
+    // The id from req.params is stored in a variable called id
+    const { id } = req.params;
+    // req.body is destructured and stored in variables
+    const { product_name, price, stock, category_id } = req.body;
+    // The update method is a sequelize method that will update one piece of data in the database
+    // the destructured req.body is passed into the method
+    const productData = await Product.update(
+      {
+        product_name,
+        price,
+        stock,
+        category_id,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    // If no data is found, a 404 status is sent to the client with a json message
+    if (!productData) {
+      res.status(404).json({ message: "No product found with this id" });
+      return;
+    }
+    // The updated data is sent as a json to the client
+    res.json(productData);
   } catch (error) {
+    // If there is an error, the error is logged and a 500 status is sent to the client with a json message
     console.log({ error });
     res.status(500).json({ error: "Failed to update product" });
   }
