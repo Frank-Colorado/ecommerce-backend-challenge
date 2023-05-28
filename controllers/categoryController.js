@@ -106,6 +106,7 @@ const deleteCategory = async (req, res) => {
   }
 };
 
+// The CRUD functions are exported to be used in the categoryRoutes.js file
 module.exports = {
   getAllCategories,
   getCategoryById,
