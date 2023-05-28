@@ -1,10 +1,16 @@
 const { Tag } = require("../models");
 
-// Function that gets all tags
+// This is an async function called getAllTags
+// It is called when a user makes a GET request to /api/tags
 const getAllTags = async (req, res) => {
   try {
-    // code here
+    // The findAll method is a sequelize method that will find all of the data from the Tag Model
+    // It is then stored in the tagData variable
+    const tagData = await Tag.findAll();
+    // The data is then sent as a json to the client
+    res.json(tagData);
   } catch (error) {
+    // If there is an error, the error is logged and a 500 status is sent to the client with a json message
     console.log({ error });
     res.status(500).json({ error: "Failed to get all tags" });
   }
