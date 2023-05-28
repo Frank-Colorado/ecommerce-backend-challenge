@@ -83,12 +83,25 @@ const updateCategory = async (req, res) => {
     res.status(500).json({ error: "Failed to update category" });
   }
 };
-// Function that deletes a category by id
+// This is an async function called deleteCategory
+// It is called when a user makes a DELETE request to /api/categories/:id
 const deleteCategory = async (req, res) => {
   try {
-    // code here
+    // req.params is destructured
+    const { id } = req.params;
+    // The destroy method is a sequelize method that will delete a piece of data in the Category Model
+    // where the id is equal to what is specified in the req.params
+    const categoryData = await Category.destroy({ where: { id } });
+    // If no data is found, a 404 status is sent to the client with a json message
+    if (!categoryData) {
+      res.status(404).json({ message: "No category found with this id" });
+      return;
+    }
+    // The deleted data is sent as a json to the client
+    res.json(categoryData);
   } catch (error) {
     console.log({ error });
+    // If there is an error, the error is logged and a 500 status is sent to the client with a json message
     res.status(500).json({ error: "Failed to delete category" });
   }
 };
