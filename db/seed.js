@@ -3,7 +3,7 @@ const { faker } = require("@faker-js/faker");
 
 const seedDb = async () => {
   try {
-    // seed Category Model
+    // -----Seed Category Model-----
     // An array of category names is created
     const categories = [Electronics, Clothing, Home, Food, Toys, Tools];
     // The categories array is mapped through
@@ -13,7 +13,8 @@ const seedDb = async () => {
       categories.map((category) => ({ category_name: category }))
     );
     console.log({ categoryData });
-    // seed Product Model
+
+    // -----Seed Product Model-----
     // A product object is created with the faker library for the Product Model
     const productObj = {
       product_name: faker.commerce.productName(),
@@ -26,7 +27,8 @@ const seedDb = async () => {
     // The products array is passed to the bulkCreate method to create data in the Product Model
     const productData = await Product.bulkCreate(products);
     console.log({ productData });
-    // seed Tag Model
+
+    // -----Seed Tag Model-----
     // An array of tag names is created
     const tags = [New, Sale, Trending, Popular, Seasonal, Limited];
     // The tags array is mapped through
@@ -36,7 +38,11 @@ const seedDb = async () => {
       tags.map((tag) => ({ tag_name: tag }))
     );
     console.log({ tagData });
-    // seed ProductTag Model
+
+    // -----Seed ProductTag Model-----
+    // For seeding the ProductTag Model, I wanted to create realistic data where each product has a random number of tags
+    // and each tag is assigned to a random number of products off the associates that I delcared in the models/index.js file
+    // Since both have many to many relationships
     // The finaAll method is used to get all products and tags that were created in the previous steps
     // Promise.all is used to wait for both queries to finish which returns an array of arrays
     // The array of arrays is destructured into two variables
@@ -68,3 +74,5 @@ const seedDb = async () => {
     console.log({ err });
   }
 };
+
+seedDb();
