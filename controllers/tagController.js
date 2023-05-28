@@ -81,11 +81,24 @@ const updateTag = async (req, res) => {
   }
 };
 
-// Function that deletes a tag by id
+// This is an async function called deleteTag
+// It is called when a user makes a DELETE request to /api/tags/:id
 const deleteTag = async (req, res) => {
   try {
-    // code here
+    // The id from req.params is stored in a variable called id
+    const { id } = req.params;
+    // The destroy method is a sequelize method that will delete a piece of data in the Tag Model
+    // where the id is equal to what is specified in the req.params
+    const tagData = await Tag.destroy({ where: { id } });
+    // If no data is found, a 404 status is sent to the client with a json message
+    if (!tagData) {
+      res.status(404).json({ message: "No tag found with this id" });
+      return;
+    }
+    // The deleted data is sent as a json to the client
+    res.json(tagData);
   } catch (error) {
+    // If there is an error, the error is logged and a 500 status is sent to the client with a json message
     console.log({ error });
     res.status(500).json({ error: "Failed to delete tag" });
   }
