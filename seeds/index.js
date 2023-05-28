@@ -1,6 +1,7 @@
-const { Category, Product, Tag, ProductTag } = require("../models");
-const { faker } = require("@faker-js/faker");
-
+const seedCategories = require("./seeders/seedCategories");
+const seedProducts = require("./seeders/seedProducts");
+const seedTags = require("./seeders/seedTags");
+const seedProductTags = require("./seeders/seedProductTags");
 const seedDb = async () => {
   try {
     // -----Seed Category Model-----
