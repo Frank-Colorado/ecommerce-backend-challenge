@@ -21,7 +21,7 @@ const getAllCategories = async (req, res) => {
 const getCategoryById = async (req, res) => {
   try {
     // The id from req.params is stored in a variable called id
-    const id = req.params.id;
+    const id = req.params;
     // The findByPk method is a sequelize method that will find one piece of data from the Category Model
     // where the id is equal to what is specified in the req.params
     const categoryData = await Category.findByPk(id);
