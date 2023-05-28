@@ -11,6 +11,7 @@ const seedProducts = async () => {
     // The map method is used to create an object for each element in the array
     // faker is used to create fake data for each object
     // Each object is returned and added to the products array
+    // This documentation was used as reference when using the Array.from() method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
     const products = Array.from({ length: 50 }).map(() => ({
       product_name: faker.commerce.productName(),
       price: faker.commerce.price(),
