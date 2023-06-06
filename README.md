@@ -40,7 +40,7 @@ N/A
 
 ## Usage
 
-video here ---
+https://drive.google.com/file/d/1Al9jRbsIzNB7MbVB5nQudT1KVCHthXrj/view : This is a walkthrough tutorial of how to use this application. I demonstrate how to create the database, seed the database, and run the server. I also demonstrate all the CRUD routes using Postman.
 
 ## Credits
 
